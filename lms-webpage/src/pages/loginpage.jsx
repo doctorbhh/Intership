@@ -34,9 +34,9 @@ const LoginPage = () => {
 <div className="position-relative">
   
   <div
-    style={{
-      position: 'absolute',
-      top: '-31px',
+     style={{
+      position: 'relatives',
+      top: '21px',
       left: '50px',
       width: '68px',
       height: '39px',
