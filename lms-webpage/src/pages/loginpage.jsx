@@ -41,7 +41,7 @@ const LoginPage = () => {
       width: '68px',
       height: '39px',
       fontWeight: '600',
-      fontSize: '28px', // adjusted to visually match height
+      fontSize: '28px', 
       lineHeight: '39px',
     }}
   >
@@ -49,7 +49,7 @@ const LoginPage = () => {
   </div>
 
 <div className="container-fluid bg-white">
-  <div className="row w-100" style={{ marginTop: '60px' }}> {/* ← move both sections down */}
+  <div className="row w-100" style={{ marginTop: '60px' }}> 
     {/* Left Side Image */}
     <div
       className="col-md-6 d-none d-md-block p-5"
