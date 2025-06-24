@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --primary-background: #a04bab;
+    --primary-foreground: #ffffff;
+    --primary-light: #c084fc;
+    --primary-dark: #7c3aed;
+
+    /* Secondary Colors */
+    --secondary-background: #ffffff;
+    --secondary-foreground: #323232;
+    --secondary-light: #f7f7f7;
+    --secondary-dark: #222222;
+
+    /* Accent Colors */
+    --accent-color: #fcf6ff;
+    --accent-foreground: #323232;
+    --accent-light: #f3e8ff;
+    --accent-dark: #e9d5ff;
+
+    /* Border Colors */
+    --border-primary: #e9e9e9;
+    --border-secondary: #cccccc;
+    --border-light: #f0f0f0;
+    --border-dark: #999999;
+
+    /* Status Colors */
+    --status-active: #1ec418;
+    --status-inactive: #ff9d00;
+    --status-suspended: #f43535;
+    --status-active-bg: #dafbe6;
+    --status-inactive-bg: #fcecd2;
+    --status-suspended-bg: #ffe5e5;
+  }
+}
+
+@layer utilities {
+  /* Background Color Utilities */
+  .bg-primary-purple {
+    background-color: var(--primary-background);
+  }
+
+  .bg-primary-light {
+    background-color: var(--primary-light);
+  }
+
+  .bg-primary-dark {
+    background-color: var(--primary-dark);
+  }
+
+  .bg-secondary-white {
+    background-color: var(--secondary-background);
+  }
+
+  .bg-secondary-light {
+    background-color: var(--secondary-light);
+  }
+
+  .bg-secondary-dark {
+    background-color: var(--secondary-dark);
+  }
+
+  .bg-accent {
+    background-color: var(--accent-color);
+  }
+
+  .bg-accent-light {
+    background-color: var(--accent-light);
+  }
+
+  .bg-accent-dark {
+    background-color: var(--accent-dark);
+  }
+
+  /* Text Color Utilities */
+  .text-primary-white {
+    color: var(--primary-foreground);
+  }
+
+  .text-secondary-gray {
+    color: var(--secondary-foreground);
+  }
+
+  .text-accent-gray {
+    color: var(--accent-foreground);
+  }
+
+  /* Border Color Utilities */
+  .border-primary {
+    border-color: var(--border-primary);
+  }
+
+  .border-secondary {
+    border-color: var(--border-secondary);
+  }
+
+  .border-light {
+    border-color: var(--border-light);
+  }
+
+  .border-dark {
+    border-color: var(--border-dark);
+  }
+
+  /* Status Color Utilities */
+  .text-status-active {
+    color: var(--status-active);
+  }
+
+  .text-status-inactive {
+    color: var(--status-inactive);
+  }
+
+  .text-status-suspended {
+    color: var(--status-suspended);
+  }
+
+  .bg-status-active {
+    background-color: var(--status-active-bg);
+  }
+
+  .bg-status-inactive {
+    background-color: var(--status-inactive-bg);
+  }
+
+  .bg-status-suspended {
+    background-color: var(--status-suspended-bg);
+  }
+}
