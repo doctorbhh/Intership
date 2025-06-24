@@ -35,7 +35,7 @@ const LoginPage = () => {
   
   <div
      style={{
-      position: 'relatives',
+      position: 'relative',
       top: '21px',
       left: '50px',
       width: '68px',
