@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../components/common/Header';
 import Sidebar from '../../components/common/Sidebar';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import './CustomCalendar.css';
+
 import OverviewChart from '../../components/OverviewChart';
 import RevenueSummaryChart from '../../components/RevenueSummaryChart';
 
