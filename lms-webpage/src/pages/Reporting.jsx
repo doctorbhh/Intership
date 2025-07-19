@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../components/common/Header';
-import Sidebar from '../../components/common/Sidebar';
-import Pagination from '../../components/ui/Pagination';
+import Header from '../components/common/Header';
+import Sidebar from '../components/common/Sidebar';
+import Pagination from '../components/ui/Pagination';
 import { useNavigate } from 'react-router-dom';
+import courses from './Courses';
+import { Rocket } from 'lucide-react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'; 
 
-const Student = () => {
+const Reports = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(6);
   const [selectedFilter, setSelectedFilter] = useState('');
   const [selectedDateRange, setSelectedDateRange] = useState('May 01 - May 11');
   const [isSidebarMinimized, setIsSidebarMinimized] = useState(false); // Track sidebar state
+  const [showModal, setShowModal] = useState(false);
+ const [selectedReport, setSelectedReport] = useState(null);
+ const [selectedStatus, setSelectedStatus] = useState('');
 
-  const studentsData = [
-    { id: 1, name: 'John', userId: '#s98765', email: 'John@example.com', organization: 'Sample Institute', role: 'Instructor', lastLogin: '22:05,12/05/25', status: 'Active', avatar: '/images/img_frame_5518_35x35.png' },
-    { id: 2, name: 'Jude Mariyah', userId: '#s987re', email: 'John@example.com', organization: 'Sample Institute', role: 'Admin', lastLogin: '22:05,12/05/25', status: 'Inactive', avatar: '/images/img_frame_5518_1.png' },
-    { id: 3, name: 'Ben Tension', userId: '#s98455', email: 'John@example.com', organization: 'Sample Institute', role: 'Student', lastLogin: '22:05,12/05/25', status: 'Suspended', avatar: '/images/img_frame_5518_2.png' },
-    { id: 4, name: 'Mary Rawan Rose', userId: '#s98765', email: 'John@example.com', organization: 'Sample Institute', role: 'Instructor', lastLogin: '22:05,12/05/25', status: 'Active', avatar: '/images/img_frame_5518_3.png' },
-    { id: 5, name: 'John', userId: '#s98765', email: 'John@example.com', organization: 'Sample Institute', role: 'Admin', lastLogin: '22:05,12/05/25', status: 'Inactive', avatar: '/images/img_frame_5518_4.png' },
-    { id: 6, name: 'Jude Mariyah', userId: '#s987re', email: 'John@example.com', organization: 'Sample Institute', role: 'Student', lastLogin: '22:05,12/05/25', status: 'Active', avatar: '/images/img_frame_5518_5.png' },
-    { id: 7, name: 'Ben Tension', userId: '#s98455', email: 'John@example.com', organization: 'Sample Institute', role: 'Student', lastLogin: '22:05,12/05/25', status: 'Inactive', avatar: '/images/img_frame_5518_6.png' },
-    { id: 8, name: 'John', userId: '#s98765', email: 'John@example.com', organization: 'Sample Institute', role: 'Student', lastLogin: '22:05,12/05/25', status: 'Suspended', avatar: '/images/img_frame_5518_7.png' },
-  ];
+
+   const [reportingData, setReportingData] = useState([
+    {id: 1, reported_item: 'User: harsh_21',  reported_by: 'Sophia Adams', date_created:'12/06/2025',reason_for:'Inappropriate language',status: 'Reviewed',},
+    {id: 2, reported_item: 'User: harsh_21',  reported_by: 'Sophia Adams', date_created:'12/06/2025',reason_for:'Inappropriate language',status: 'Pending',},
+    {id: 3, reported_item: 'User: harsh_21',  reported_by: 'Sophia Adams', date_created:'12/06/2025',reason_for:'Inappropriate language',status: 'Rejected',},
+    {id: 4, reported_item: 'User: harsh_21',  reported_by: 'Sophia Adams', date_created:'12/06/2025',reason_for:'Inappropriate language',status: 'Reviewed',},
+    {id: 5, reported_item: 'User: harsh_21',  reported_by: 'Sophia Adams', date_created:'12/06/2025',reason_for:'Inappropriate language',status: 'Pending',},
+    {id: 6, reported_item: 'User: harsh_21',  reported_by: 'Sophia Adams', date_created:'12/06/2025',reason_for:'Inappropriate language',status: 'Reviewed',},
+    {id: 7, reported_item: 'User: harsh_21',  reported_by: 'Sophia Adams', date_created:'12/06/2025',reason_for:'Inappropriate language',status: 'Rejected',},
+    {id: 8, reported_item: 'User: harsh_21',  reported_by: 'Sophia Adams', date_created:'12/06/2025',reason_for:'Inappropriate language',status: 'Pending',},
+  ]);
 
   const filterOptions = [
     { value: 'all', label: 'All Students' },
@@ -40,16 +48,43 @@ const Student = () => {
   const handleDateRangeChange = (value) => setSelectedDateRange(value);
   const handleExport = () => { console.log('Exporting...'); alert('Exported!'); };
   const navigate = useNavigate();
-  const handleAddUser = () => { navigate('/addstudent'); };
-  const handleViewStudent = (id) => { console.log(`View ${id}`); alert(`View ${id}`); };
+  
+  
   const handleEditStudent = (id) => { console.log(`Edit ${id}`); alert(`Edit ${id}`); };
   const handleDeleteStudent = (id) => { if (confirm(`Delete ${id}?`)) alert(`Deleted ${id}`); };
+    const handleViewStudent = (report) => {
+    setSelectedReport(report);
+    setSelectedStatus(report.status);
+    setShowModal(true);
+    };
+const handleUpdateStatus = () => {
+  if (!selectedReport) return;
+
+  setReportingData((prevData) =>
+    prevData.map((report) =>
+      report.id === selectedReport.id
+        ? { ...report, status: selectedStatus }
+        : report
+    )
+  );
+  
+  handleClose(); 
+};
+
+  
+
+
+const handleClose = () => {
+    setShowModal(false);
+    setSelectedReport(null);
+};
+
 
   const getStatusBadge = (status) => {
     const statusClasses = {
-      Active: 'bg-status-active text-status-active',
-      Inactive: 'bg-status-inactive text-status-inactive',
-      Suspended: 'bg-status-suspended text-status-suspended',
+      Reviewed: 'bg-status-active text-status-active',
+      Pending: 'bg-status-inactive text-status-inactive',
+      Rejected: 'bg-status-suspended text-status-suspended',
     };
     return <span className={`badge rounded-pill ${statusClasses[status]}`}>{status}</span>;
   };
@@ -73,14 +108,12 @@ const Student = () => {
           >
 
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="h4 mb-0 text-secondary-gray">Students</h2>
+            <h2 className="h4 mb-0 text-secondary-gray">Instructors</h2>
             <div className="d-flex gap-4">
               <button className="btn btn-outline-secondary d-flex align-items-center gap-1" onClick={handleExport}>
                 <img src="/images/img_frame_5.svg" alt="Export" className="w-4 h-4" /> Export
               </button>
-              <button className="btn btn-primary bg-primary-purple text-primary-white d-flex align-items-center gap-1" onClick={handleAddUser}>
-                <img src="/images/img_frame_white_a700.svg" alt="Add" className="w-4 h-4" /> Add Student
-              </button>
+              
             </div>
           </div>
           <div className="card border-0 shadow-sm">
@@ -136,41 +169,36 @@ const Student = () => {
               <table className="table table-hover align-middle">
                 <thead>
                   <tr className="txt-gray">
-                    <th className="py-2 px-3">Name</th>
-                    <th className="py-2 px-3">Email</th>
-                    <th className="py-2 px-3">Organization</th>
+                    <th className="py-2 px-3">Reported Item</th>
+                    <th className="py-2 px-3">Reported by </th>
+                    <th className="py-2 px-3">Date & Time</th>
                     
-                    <th className="py-2 px-3">Last Login</th>
+                    <th className="py-2 px-3">Reason for flag</th>
+                    
                     <th className="py-2 px-3">Status</th>
                     <th className="py-2 px-3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {studentsData.map((student) => (
-                    <tr key={student.id}>
-                      <td className="py-2 px-3">
-                        <div className="d-flex align-items-center">
-                          <img src={student.avatar} alt={student.name} className="rounded-circle me-2" style={{ width: '32px', height: '32px' }} />
-                          <div>
-                            <div className="text-secondary-gray">{student.name}</div>
-                            <small className="text-muted">{student.userId}</small>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="py-2 px-3 text-secondary-gray">{student.email}</td>
-                      <td className="py-2 px-3 text-secondary-gray">{student.organization}</td>
+                  {reportingData.map((report, index) => (
+                     <tr key={index}>
                       
-                      <td className="py-2 px-3 text-secondary-gray">{student.lastLogin}</td>
-                      <td className="py-2 px-3">{getStatusBadge(student.status)}</td>
+                      <td className="py-2 px-3 text-g">{report.reported_item}</td>
+                      <td className="py-2 px-3 text-g">{report.reported_by}</td>
+                      
+                      <td className="py-2 px-3 text-g">{report.date_created}</td>
+                      <td className="py-2 px-3 text-g">{report.reason_for}</td>
+                      <td className="py-2 px-3">{getStatusBadge(report.status)}</td>
                       <td className="py-2 px-3">
                         <div className="d-flex gap-2">
-                          <button className="btn p-1" onClick={() => handleViewStudent(student.id)}>
+                          <button className="btn p-1" onClick={() => handleViewStudent(report)}>
+
                             <img src="/images/img_frame_indigo_50.svg" alt="View" className="w-5 h-5" />
                           </button>
-                          <button className="btn p-1" onClick={() => handleEditStudent(student.id)}>
+                          <button className="btn p-1" onClick={() => handleEditStudent(report.id)}>
                             <img src="/images/img_vector_green_a700.svg" alt="Edit" className="w-4 h-4" />
                           </button>
-                          <button className="btn p-1" onClick={() => handleDeleteStudent(student.id)}>
+                          <button className="btn p-1" onClick={() => handleDeleteStudent(report.id)}>
                             <img src="/images/img_vector_red_500.svg" alt="Delete" className="w-4 h-4" />
                           </button>
                         </div>
@@ -180,6 +208,47 @@ const Student = () => {
                 </tbody>
               </table>
             </div>
+
+            {/* Modal */}
+          <Modal show={showModal} onHide={handleClose} centered>
+            <Modal.Header closeButton>
+              <Modal.Title>View Report</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            {selectedReport && (
+                <>
+                <p><strong>Reported Item:</strong> {selectedReport.reported_item}</p>
+                <p><strong>Reported by:</strong> {selectedReport.reported_by}</p>
+                <p><strong>Date and Time:</strong> {selectedReport.date_created}</p>
+                <p><strong>Reason for flag:</strong> {selectedReport.reason_for}</p>
+                <p><strong>Description:</strong><br /> 
+                    {/* If you don’t have a description field in your data yet, add a fallback */}
+                    {selectedReport.description || 'No description available.'}
+                </p>
+                <div className="mt-3">
+                    <select
+                    className="form-select"
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    >
+                    <option value="Pending">Pending</option>
+                    <option value="Reviewed">Reviewed</option>
+                    <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+                </>
+            )}
+            </Modal.Body>
+
+            <Modal.Footer>
+            <Button variant="primary" onClick={handleUpdateStatus}>
+                Update
+            </Button>
+            </Modal.Footer>
+
+          </Modal>
+
+
             <div className="card-footer bg-accent-light p-3 border-0">
               <Pagination currentPage={currentPage} totalPages={10} onPageChange={setCurrentPage} className="justify-content-end" />
             </div>
@@ -190,4 +259,4 @@ const Student = () => {
   );
 };
 
-export default Student;
+export default Reports;

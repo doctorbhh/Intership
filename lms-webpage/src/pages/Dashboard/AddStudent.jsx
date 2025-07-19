@@ -3,7 +3,7 @@ import Header from '../../components/common/Header';
 import Sidebar from '../../components/common/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
-const AddUser = () => {
+const AddStudent = () => {
   const [isSidebarMinimized, setIsSidebarMinimized] = useState(false);
   const [orgType, setOrgType] = useState('');
   const navigate = useNavigate();
@@ -56,6 +56,15 @@ const AddUser = () => {
           <div className="col-md-6 mb-3">
             <label className="form-label">Organization Name *</label>
             <input className="form-control" placeholder="Organization Name" required style={{ fontStyle: 'italic' ,fontFamily:'Inter'}}/>
+          </div>
+          <div className="col-md-6 mb-3">
+            <label className="form-label">Degree *</label>
+            <select className="form-select" required style={{ fontStyle: 'italic' ,fontFamily:'Inter'}}>
+              <option value="">Degree</option>
+              <option>B.TECH</option>
+              <option>M.TECH</option>
+              <option>OTHERS</option>
+            </select>
           </div>
           <div className="col-md-6 mb-3">
             <label className="form-label">Department *</label>
@@ -184,9 +193,19 @@ const AddUser = () => {
                   <option value="Other">Other</option>
                 </select>
               </div>
+              
               <div className="col-md-6 mb-3">
                 <label className="form-label">Address *</label>
                 <input className="form-control" placeholder="Address" required style={{ fontStyle: 'italic' ,fontFamily:'Inter'}}/>
+              </div>
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Language *</label>
+                <select className="form-select" required style={{ fontStyle: 'italic' ,fontFamily:'Inter'}}>
+                  <option value="">Language</option>
+                  <option value="Male">Tamil</option>
+                  <option value="Female">English</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
             </div>
 
@@ -222,4 +241,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default AddStudent;

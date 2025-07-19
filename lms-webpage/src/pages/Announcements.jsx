@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../components/common/Header';
-import Sidebar from '../../components/common/Sidebar';
-import Pagination from '../../components/ui/Pagination';
+import Header from '../components/common/Header';
+import Sidebar from '../components/common/Sidebar';
+import Pagination from '../components/ui/Pagination';
 import { useNavigate } from 'react-router-dom';
 
-const Student = () => {
+
+const Announcements = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(6);
   const [selectedFilter, setSelectedFilter] = useState('');
   const [selectedDateRange, setSelectedDateRange] = useState('May 01 - May 11');
   const [isSidebarMinimized, setIsSidebarMinimized] = useState(false); // Track sidebar state
 
-  const studentsData = [
-    { id: 1, name: 'John', userId: '#s98765', email: 'John@example.com', organization: 'Sample Institute', role: 'Instructor', lastLogin: '22:05,12/05/25', status: 'Active', avatar: '/images/img_frame_5518_35x35.png' },
-    { id: 2, name: 'Jude Mariyah', userId: '#s987re', email: 'John@example.com', organization: 'Sample Institute', role: 'Admin', lastLogin: '22:05,12/05/25', status: 'Inactive', avatar: '/images/img_frame_5518_1.png' },
-    { id: 3, name: 'Ben Tension', userId: '#s98455', email: 'John@example.com', organization: 'Sample Institute', role: 'Student', lastLogin: '22:05,12/05/25', status: 'Suspended', avatar: '/images/img_frame_5518_2.png' },
-    { id: 4, name: 'Mary Rawan Rose', userId: '#s98765', email: 'John@example.com', organization: 'Sample Institute', role: 'Instructor', lastLogin: '22:05,12/05/25', status: 'Active', avatar: '/images/img_frame_5518_3.png' },
-    { id: 5, name: 'John', userId: '#s98765', email: 'John@example.com', organization: 'Sample Institute', role: 'Admin', lastLogin: '22:05,12/05/25', status: 'Inactive', avatar: '/images/img_frame_5518_4.png' },
-    { id: 6, name: 'Jude Mariyah', userId: '#s987re', email: 'John@example.com', organization: 'Sample Institute', role: 'Student', lastLogin: '22:05,12/05/25', status: 'Active', avatar: '/images/img_frame_5518_5.png' },
-    { id: 7, name: 'Ben Tension', userId: '#s98455', email: 'John@example.com', organization: 'Sample Institute', role: 'Student', lastLogin: '22:05,12/05/25', status: 'Inactive', avatar: '/images/img_frame_5518_6.png' },
-    { id: 8, name: 'John', userId: '#s98765', email: 'John@example.com', organization: 'Sample Institute', role: 'Student', lastLogin: '22:05,12/05/25', status: 'Suspended', avatar: '/images/img_frame_5518_7.png' },
+  const AnnouncementsData = [
+    { title: 'New Features Added to the LMS', audience: 'Organization & Instructor',date_created:'12/06/2025',start_and_end_date:'17/06/2025 - 02/07/2025',priority_level:'Normal'   ,status: 'Scheduled',},
+    { title: 'New Features Added to the LMS',  audience: 'John@example.com',        date_created:'12/06/2025',start_and_end_date:'17/06/2025 - 02/07/2025',priority_level:'Important',status: 'Expired',},
+    { title: 'Ben Tension',  audience: 'John@example.com',                          date_created:'12/06/2025',start_and_end_date:'17/06/2025 - 02/07/2025',priority_level:'Critical' ,status: 'Scheduled',},
+    { title: 'Mary Rawan Rose',  audience: 'John@example.com',                      date_created:'12/06/2025',start_and_end_date:'17/06/2025 - 02/07/2025',priority_level:'Important',status: 'Published',},
+    { title: 'John',  audience: 'John@example.com',                                 date_created:'12/06/2025',start_and_end_date:'17/06/2025 - 02/07/2025',priority_level:'Normal'   ,status: 'Expired',},
+    { title: 'Jude Mariyah',  audience: 'John@example.com',                         date_created:'12/06/2025',start_and_end_date:'17/06/2025 - 02/07/2025',priority_level:'Important',status: 'Published',},
+    { title: 'Ben Tension',  audience: 'John@example.com',                          date_created:'12/06/2025',start_and_end_date:'17/06/2025 - 02/07/2025',priority_level:'Critical' ,status: 'Scheduled',},
+    { title: 'John',  audience: 'John@example.com',                                 date_created:'12/06/2025',start_and_end_date:'17/06/2025 - 02/07/2025',priority_level:'Important',status: 'Published',},
   ];
 
   const filterOptions = [
@@ -40,18 +41,27 @@ const Student = () => {
   const handleDateRangeChange = (value) => setSelectedDateRange(value);
   const handleExport = () => { console.log('Exporting...'); alert('Exported!'); };
   const navigate = useNavigate();
-  const handleAddUser = () => { navigate('/addstudent'); };
+  const handleAddUser = () => { navigate('/postannouncements'); };
   const handleViewStudent = (id) => { console.log(`View ${id}`); alert(`View ${id}`); };
   const handleEditStudent = (id) => { console.log(`Edit ${id}`); alert(`Edit ${id}`); };
   const handleDeleteStudent = (id) => { if (confirm(`Delete ${id}?`)) alert(`Deleted ${id}`); };
 
   const getStatusBadge = (status) => {
     const statusClasses = {
-      Active: 'bg-status-active text-status-active',
-      Inactive: 'bg-status-inactive text-status-inactive',
-      Suspended: 'bg-status-suspended text-status-suspended',
+      Published: 'bg-status-active text-status-active',
+      Scheduled: 'bg-status-inactive text-status-inactive',
+      Expired: 'bg-status-suspended text-status-suspended',
     };
     return <span className={`badge rounded-pill ${statusClasses[status]}`}>{status}</span>;
+  };
+
+    const getPriorityBadge = (priority_level) => {
+    const statusClasses = {
+      Normal: 'bg-status-active text-status-active',
+      Important: 'bg-status-inactive text-status-inactive',
+      Critical: 'bg-status-suspended text-status-suspended',
+    };
+    return <span className={`badge rounded-pill ${statusClasses[priority_level]}`}>{priority_level}</span>;
   };
 
   // Callback to update sidebar minimized state
@@ -73,13 +83,13 @@ const Student = () => {
           >
 
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="h4 mb-0 text-secondary-gray">Students</h2>
+            <h2 className="h4 mb-0 text-secondary-gray">Announcements</h2>
             <div className="d-flex gap-4">
               <button className="btn btn-outline-secondary d-flex align-items-center gap-1" onClick={handleExport}>
                 <img src="/images/img_frame_5.svg" alt="Export" className="w-4 h-4" /> Export
               </button>
               <button className="btn btn-primary bg-primary-purple text-primary-white d-flex align-items-center gap-1" onClick={handleAddUser}>
-                <img src="/images/img_frame_white_a700.svg" alt="Add" className="w-4 h-4" /> Add Student
+                <img src="/images/img_frame_white_a700.svg" alt="Add" className="w-4 h-4" /> Post Announcements
               </button>
             </div>
           </div>
@@ -136,41 +146,44 @@ const Student = () => {
               <table className="table table-hover align-middle">
                 <thead>
                   <tr className="txt-gray">
-                    <th className="py-2 px-3">Name</th>
-                    <th className="py-2 px-3">Email</th>
-                    <th className="py-2 px-3">Organization</th>
+                    <th className="py-2 px-3">Title</th>
+                    <th className="py-2 px-3">Audience</th>
+                    <th className="py-2 px-3">Date Created</th>
                     
-                    <th className="py-2 px-3">Last Login</th>
+                    <th className="py-2 px-3">Start and End date</th>
+                    <th className="py-2 px-3">Priority</th>
                     <th className="py-2 px-3">Status</th>
                     <th className="py-2 px-3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {studentsData.map((student) => (
-                    <tr key={student.id}>
+                  {AnnouncementsData.map((announcements) => (
+                    <tr key={announcements.id}>
                       <td className="py-2 px-3">
                         <div className="d-flex align-items-center">
-                          <img src={student.avatar} alt={student.name} className="rounded-circle me-2" style={{ width: '32px', height: '32px' }} />
+                          
                           <div>
-                            <div className="text-secondary-gray">{student.name}</div>
-                            <small className="text-muted">{student.userId}</small>
+                            <div className="text-g">{announcements.title}</div>
+                            <small className="text-muted">{announcements.userId}</small>
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 px-3 text-secondary-gray">{student.email}</td>
-                      <td className="py-2 px-3 text-secondary-gray">{student.organization}</td>
+                      <td className="py-2 px-3 text-g">{announcements.audience}</td>
+                      <td className="py-2 px-3 text-g">{announcements.date_created}</td>
                       
-                      <td className="py-2 px-3 text-secondary-gray">{student.lastLogin}</td>
-                      <td className="py-2 px-3">{getStatusBadge(student.status)}</td>
+                      <td className="py-2 px-3 text-g">{announcements.start_and_end_date}</td>
+                      <td className="py-2 px-3">{getPriorityBadge(announcements.priority_level)}</td>
+
+                      <td className="py-2 px-3">{getStatusBadge(announcements.status)}</td>
                       <td className="py-2 px-3">
                         <div className="d-flex gap-2">
-                          <button className="btn p-1" onClick={() => handleViewStudent(student.id)}>
+                          <button className="btn p-1" onClick={() => handleViewStudent(announcements.id)}>
                             <img src="/images/img_frame_indigo_50.svg" alt="View" className="w-5 h-5" />
                           </button>
-                          <button className="btn p-1" onClick={() => handleEditStudent(student.id)}>
+                          <button className="btn p-1" onClick={() => handleEditStudent(announcements.id)}>
                             <img src="/images/img_vector_green_a700.svg" alt="Edit" className="w-4 h-4" />
                           </button>
-                          <button className="btn p-1" onClick={() => handleDeleteStudent(student.id)}>
+                          <button className="btn p-1" onClick={() => handleDeleteStudent(announcements.id)}>
                             <img src="/images/img_vector_red_500.svg" alt="Delete" className="w-4 h-4" />
                           </button>
                         </div>
@@ -190,4 +203,4 @@ const Student = () => {
   );
 };
 
-export default Student;
+export default Announcements;

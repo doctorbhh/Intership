@@ -85,7 +85,7 @@ const Pagination = ({
           onClick={handleNext}
           disabled={currentPage === totalPages}
           className="btn rounded-circle p-1 bg-accent hover-bg-accent-dark text-secondary-gray disabled-opacity-50 disabled-cursor-not-allowed transition-colors"
-          style={{ width: '28px', height: '28px' }}
+          style={{ width: '28px', height: '30px' }}
         >
           <img
             src="/images/img_vector_gray_601.svg"

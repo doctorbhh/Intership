@@ -14,35 +14,36 @@ const LMSDashboard = () => {
   const handleSidebarToggle = (minimized) => setIsSidebarMinimized(minimized);
 
   const metrics = [
-    {
-      label: 'Total Students',
-      value: 75260,
-      change: '+4.26%',
-      icon: 'bi-mortarboard',
-      changeColor: 'text-success',
-    },
-    {
-      label: 'Total Organizations',
-      value: 534,
-      change: '-1.5%',
-      icon: 'bi-building',
-      changeColor: 'text-danger',
-    },
-    {
-      label: 'Total Instructors',
-      value: 1256,
-      change: '+0.7%',
-      icon: 'bi-person-video3',
-      changeColor: 'text-success',
-    },
-    {
-      label: 'Total Courses',
-      value: 23964,
-      change: '+0.7%',
-      icon: 'bi-book',
-      changeColor: 'text-success',
-    },
-  ];
+  {
+    label: 'Total Students',
+    value: 75260,
+    change: '+4.26%',
+    icon: '/images/profile.svg',
+    changeColor: 'text-success',
+  },
+  {
+    label: 'Total Organizations',
+    value: 534,
+    change: '-1.5%',
+    icon: '/images/icon_organizations.svg',
+    changeColor: 'text-danger',
+  },
+  {
+    label: 'Total Instructors',
+    value: 1256,
+    change: '+0.7%',
+    icon: '/images/icon_instructors.svg',
+    changeColor: 'text-success',
+  },
+  {
+    label: 'Total Courses',
+    value: 23964,
+    change: '+0.7%',
+    icon: '/images/icon_courses.svg',
+    changeColor: 'text-success',
+  },
+];
+
 
 
 
@@ -122,11 +123,13 @@ const LMSDashboard = () => {
                 <div className="card shadow-sm h-100">
                   <div className="card-body d-flex flex-column justify-content-between">
                     <div className="d-flex justify-content-between align-items-start">
-                      <i className={`bi ${item.icon} fs-3 text-primary`} />
+                      <h6 className="text-muted mt-2">{item.label}</h6>
                       <span className={`fw-semibold ${item.changeColor}`}>{item.change}</span>
                     </div>
-                    <h6 className="text-muted mt-2">{item.label}</h6>
-                    <h4 className="fw-bold">{item.value.toLocaleString()}</h4>
+                    <div className="d-flex justify-content-between align-items-start">
+                      <img src={item.icon} alt={item.label} style={{ width: '45px', height: '45px' }} />
+                      <h4 className="fw-bold">{item.value.toLocaleString()}</h4>
+                    </div>
                   </div>
                 </div>
               </div>

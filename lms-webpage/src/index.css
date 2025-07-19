@@ -54,7 +54,7 @@ textarea:focus {
 /* Custom colors */
 .bg-primary-purple { background-color: #a04bab !important; }
 .bg-primary-light { background-color: #c084fc !important; }
-.bg-primary-dark { background-color: #7c3aed !important; }
+.bg-primary-dark { background-color: #f4b4f0 !important; }
 .bg-secondary-white { background-color: #ffffff !important; }
 .bg-secondary-light { background-color: #f4b4f0 !important; }
 .bg-secondary-dark { background-color: #222222 !important; }
@@ -103,8 +103,8 @@ textarea:focus {
 }
 
 .btn-primary:hover {
-  background-color: #7c3aed;
-  border-color: #7c3aed;
+  background-color: #f4b4f0;
+  border-color: #a04bab;
 }
 
 .btn-outline-secondary {
@@ -201,3 +201,57 @@ textarea:focus {
 
 
 .txt-gray { color: #333333 !important;font-family:'Inter';font-size: 12px; }
+
+
+.text-status-Archived{ color: #422AF6 !important; }
+.text-status-Scheduled { color: #1FC519  !important; }
+.text-status-Draft{ color: #FF9D00 !important; }
+.text-status-Published { color: #1FC519 !important; }
+
+.bg-status-Archived{ background-color: #E7E8FF !important; }
+.bg-status-Scheduled { background-color: #DAFBE6  !important; }
+.bg-status-Draft{ background-color: #FCECD2 !important; }
+.bg-status-Published { background-color: #DAFBE6 !important; }
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgb(255 255 255) !important;
+}
+
+.border-bottom
+
+ {
+    border-bottom: var(--bs-border-width) var(--bs-border-style) #ffffff !important;
+}
+
+.bg-acti{
+   background-color: #FCF7FF !important;
+}
+
+.text-c {
+    text-align: center !important;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.modal {
+    --bs-modal-zindex: 1055;
+    --bs-modal-width: 951px;
+}
+.btn-upload{
+    background-color: #faf4fb;
+    border-color: #A04BAB;
+    
+}
+.btn-group-sm > .btn, .btn-sm {
+    --bs-btn-padding-y: 0.55rem;
+    --bs-btn-padding-x: 1.5rem;
+    --bs-btn-font-size: 0.875rem;
+    --bs-btn-border-radius: var(--bs-border-radius-sm);
+}
+
+.text-g{
+  color: #727272!important;font-family:'Inter' ;
+
+}
